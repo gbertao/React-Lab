@@ -44,7 +44,8 @@ function App() {
   }
 
   // Delete Task
-  const deleteTask = (id) => {
+  const deleteTask = async (id) => {
+    await fetch(`http://192.168.0.11:7000/tasks/${id}`, {method: 'DELETE',})
     setTasks(tasks.filter((task) => task.id !== id))
   }
 
