@@ -25,13 +25,24 @@ function App() {
   }
 
   // Add Task
-  const addTask = (task) => {
-    const id = Math.floor(Math.random() * 10000) + 1
+  const addTask = async (task) => {
+    const res = await fetch('http://192.168.0.11:7000/tasks', {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json',
+      },
+      body: JSON.stringify(task),
+    })
 
-    const newTask = { id, ...task }
+    const data = await res.json()
 
-    setTasks([...tasks, newTask])
-    console.log(tasks)
+    setTasks([...tasks, data])
+
+    //const id = Math.floor(Math.random() * 10000) + 1
+
+    //const newTask = { id, ...task }
+
+    //setTasks([...tasks, newTask])
   }
 
   // Toggle Reminder
