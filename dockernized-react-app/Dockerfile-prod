@@ -1,0 +1,18 @@
+# Build app
+FROM node:13-alpine as build
+WORKDIR /app
+ENV PATH /app/node_modules/.bin:$PATH
+COPY App/package.json /app/package.json
+RUN npm i --silent
+RUN npm i react-script --silent
+COPY App /app
+RUN npm run build
+
+# Deploy
+FROM node:13-alpine
+WORKDIR /app
+ENV PATH /app/node_modules/.bin:$PATH
+RUN npm i serve --silent
+EXPOSE 5000
+COPY --from=build /app/build /app/build
+CMD ["serve", "-l", "5000", "-s", "build"]
