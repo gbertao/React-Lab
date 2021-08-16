@@ -1,0 +1,9 @@
+version: '3'
+services:
+  app-prod-2:
+    container_name: app
+    build:
+      context: .
+      dockerfile: Dockerfile-prod-2
+    ports:
+      - 80:80
