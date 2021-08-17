@@ -1,8 +1,11 @@
 import { useState } from 'react'
 
 const useToken = () => {
+  //const storage = sessionStorage
+  const storage = localStorage
+
   const getToken = () => {
-    const tokenStr = sessionStorage.getItem('token')
+    const tokenStr = storage.getItem('token')
     const userToken = JSON.parse(tokenStr)
     return userToken?.token
   }
@@ -10,7 +13,7 @@ const useToken = () => {
   const [token, setToken] = useState(getToken())
 
   const saveToken = userToken => {
-    sessionStorage.setItem('token', JSON.stringify(userToken))
+    storage.setItem('token', JSON.stringify(userToken))
     setToken(userToken)
   }
 
