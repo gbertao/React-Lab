@@ -1,0 +1,13 @@
+# Deploy API server
+
+FROM node:13-alpine
+
+WORKDIR /api
+
+RUN npm i express cors
+
+COPY Api/server.js /api
+
+EXPOSE 8080
+
+CMD ["node", "server"]

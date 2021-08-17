@@ -1,0 +1,23 @@
+version: "3"
+services:
+  api:
+    container_name: api
+    build:
+      context: ./
+      dockerfile: Dockerfile-api-prod
+    expose:
+      - 8080
+    ports:
+      - 8080:8080
+
+  app:
+    container_name: app
+    build:
+      context: ./
+      dockerfile: Dockerfile-app-prod
+    expose:
+     - 80
+    ports:
+     - 80:80
+    depends_on:
+     - api
